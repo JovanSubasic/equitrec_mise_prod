@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}<link rel="stylesheet" href="/css/compte.css">
+	{{ parent() }}
+	<style>
+		a[name="Dashboard"] {
+			position : absolute;
+			background-color: #4CAF50; /* couleur de fond */
+			color: white; /* couleur du texte */
+			padding: 12px 24px; /* espacement du texte par rapport au bord du bouton */
+			border-radius: 4px; /* coins arrondis */
+			text-decoration: none; /* enlever le soulignement du lien */
+			display: inline-block; /* afficher en bloc */
+			transition: background-color 0.3s ease; /* transition sur la couleur de fond lors du survol */
+		}
+
+		a[name="Dashboard"]:hover {
+			background-color: #3e8e41; /* couleur de fond au survol */
+		}
+	</style>
+{% endblock %}
+{% block title %}
+	{{ user.name }}
+{% endblock %}
+
+{% block content %}
+	<main>
+		<div class="col-md-1">
+			<table class="table table-user-information">
+				<h2 style="text-align:center" ;>Liste des informations de l'Utilisateur</h2>
+				<tbody>
+					<tr>
+						<td>Email du compte</td>
+						<td>{{ user.email }}</td>
+					</tr>
+					<tr>
+						<td>Nom représentant</td>
+						<td>{{ user.name }}</td>
+					</tr>
+					<tr>
+						<td>Date d'inscription</td>
+						<td>
+							{{ user.registerdate ? user.registerdate.format('Y-m-d H:i:s') : '' }}
+						</td>
+					</tr>
+					<tr>
+						<td>Derniere connexion</td>
+						<td>
+							{{ user.lastlogin ? user.lastlogin.format('Y-m-d H:i:s') : '' }}
+						</td>
+					</tr>
+				</tbody>
+				{% if is_granted('ROLE_ADMIN') %}
+					<a name="Dashboard" href="{{ path('admin') }}">DashboardAdmin</a>
+				{% endif %}
+			</table>
+		</div>
+	</main>
+{% endblock %}
+

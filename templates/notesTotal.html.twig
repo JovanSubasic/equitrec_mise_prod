@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	{{ parent() }}
+	<style>
+		main {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			font-size: 16px;
+			border-radius: 2px;
+		}
+
+		th,
+		td {
+			border: 1.5px solid #ccc;
+			padding: 10px;
+			text-align: left;
+		}
+
+		th {
+			background-color: #f2f2f2;
+			font-weight: bold;
+		}
+
+		tr:nth-child(even) {
+			background-color: #f9f9f9;
+		}
+
+	</style>
+
+{% endblock %}
+
+{% block title %}Résultats
+{% endblock %}
+
+{% block content %}
+	<main>
+		<div >
+			<h2>Résultats de la compétition</h2>
+
+			<table>
+				<tr>
+					<th>Dossard</th>
+					<th>Total</th>
+				</tr>
+				{% for dossard, total in resultats %}
+					<tr>
+						<td>{{ dossard }}</td>
+						<td>{{ total }}</td>
+					</tr>
+				{% endfor %}
+			</table>
+			<br>
+		</div>
+	</main>
+	<center><input type="button" onclick="location.href='{{ path('app_note_obstacles') }}';" value="Afficher les notes de la compétition" class="btn btn-primary"/></center>
+{% endblock %}
